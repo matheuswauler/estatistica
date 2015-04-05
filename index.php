@@ -24,6 +24,8 @@ echo "<br />";
 echo $CalculosEstatisticos->MediaGeometricaSimples();
 echo "<br />";
 print_r( $CalculosEstatisticos->Moda() );
+echo "<br />";
+echo $CalculosEstatisticos->Mediana();
 
 echo "<br />";
 echo "<br />";
@@ -47,6 +49,8 @@ echo "<br />";
 echo $CalculosEstatisticos->MediaGeometricaSimples();
 echo "<br />";
 print_r( $CalculosEstatisticos->Moda() );
+echo "<br />";
+echo $CalculosEstatisticos->Mediana();
 
 // echo "<br />";
 // echo $CalculosEstatisticos->Arredondar(3);

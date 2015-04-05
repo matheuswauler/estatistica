@@ -53,7 +53,7 @@ class CalculosEstatisticos {
 		}
 	}
 
-	public function Moda(){
+	public function Moda($round = true){
 		$mapa = array();
 		foreach ($this->dados_ordenados as $chave => $valor) {
 			if(array_key_exists((string) $valor, $mapa)){
@@ -83,6 +83,20 @@ class CalculosEstatisticos {
 			}
 		}
 		return $moda;
+	}
+
+	public function Mediana($round = true){
+		$metade = count( $this->dados_ordenados ) / 2 - 1;
+		if(count($this->dados_ordenados) % 2 == 0){
+			$mediana = ( $this->dados_ordenados[$metade] + $this->dados_ordenados[$metade + 1] ) / 2;
+		} else {
+			$mediana = $this->dados_ordenados[(int) $metade];
+		}
+		if($round){
+			return round($mediana, $this->casas_decimais);
+		} else {
+			return $mediana;
+		}
 	}
 
 	public function OrdenaDescrescente($a, $b){
