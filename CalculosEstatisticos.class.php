@@ -99,8 +99,12 @@ class CalculosEstatisticos {
 		}
 	}
 
-	public function OrdenaDescrescente($a, $b){
-		return $a > $b;
+	public function Minimo(){
+		return $this->dados_ordenados[0];
+	}
+
+	public function Maximo(){
+		return $this->dados_ordenados[ count( $this->dados_ordenados ) - 1 ];
 	}
 
 	public function Arredondar($valor){

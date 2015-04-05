@@ -26,6 +26,10 @@ echo "<br />";
 print_r( $CalculosEstatisticos->Moda() );
 echo "<br />";
 echo $CalculosEstatisticos->Mediana();
+echo "<br />";
+echo $CalculosEstatisticos->Minimo();
+echo "<br />";
+echo $CalculosEstatisticos->Maximo();
 
 echo "<br />";
 echo "<br />";
@@ -51,6 +55,10 @@ echo "<br />";
 print_r( $CalculosEstatisticos->Moda() );
 echo "<br />";
 echo $CalculosEstatisticos->Mediana();
+echo "<br />";
+echo $CalculosEstatisticos->Minimo();
+echo "<br />";
+echo $CalculosEstatisticos->Maximo();
 
 // echo "<br />";
 // echo $CalculosEstatisticos->Arredondar(3);
