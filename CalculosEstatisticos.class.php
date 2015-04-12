@@ -107,35 +107,19 @@ class CalculosEstatisticos {
 		return $this->dados_ordenados[ count( $this->dados_ordenados ) - 1 ];
 	}
 
-	public function Arredondar($valor){
-		$valor_string = (string) $valor;
-		$decimais = explode('.', $valor_string);
-		if(count($decimais) == 1){ // se NAO ha numeros depois da virgula
-			$arredondado = $valor;
-		} else { // se ha numeros apos a virgula
-			$numero_casas_decimais = strlen($decimais[1]);
-			if($numero_casas_decimais <= $this->casas_decimais){ // Se o numero de casas decimais do valor for MENOR do que a precisao solicitada
-				$arredondado = $valor;
-			} else { // Se o numero de casas decimais do valor for MAIOR do que a precisao solicitada
-				$cortado = (int) substr($decimais[1], $this->casas_decimais, 1);
-				if($cortado == 5){ // Se o valor de corte for 5 entra na regra do 5
-					if($this->casas_decimais == 0){ // Se o numero de casas decimais for 0 o numero arredondado vai ser o inteiro
-						$a_ser_arredondado = (int) $decimais[0];
-						$resto = (int) substr($decimais[1], 1);
-						if($a_ser_arredondado%2 == 0 && $resto == 0){
-							$arredondado = $a_ser_arredondado;
-						} else {
-							$arredondado = $a_ser_arredondado + 1;
-						}
-					} else { // Se o numero de casas decimais for maior que 0 o arredondado vai ser o numero anterior ao de corte
-						
-					}
-				} else { // Se o valor de corte NAO for 5, arredonda normalmente
-					$arredondado = round($valor, $this->casas_decimais);
-				}
-			}
-		}
-		return $arredondado;
+	public function Amplitude(){
+		return $this->Maximo() - $this->Minimo();
+	}
+
+	public function NumeroClasse(){
+		$K = 1 + 3.22 * log($this->dados_cont, 10);
+		return round($K, 0);
+	}
+
+	public function IntervaloClasse(){
+		$h = $this->Amplitude() / $this->NumeroClasse();
+		$h = (int) $h + 1;
+		return $h;
 	}
 
 }
