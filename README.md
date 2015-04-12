@@ -5,5 +5,18 @@ Desenvolvimento: Matheus William Auler, Willian Bampi
 
 # Cálculos implementados
 - Média Aritmética Simples;
+- Média Aritmética Ponderada;
 - Média Geométrica Simples;
-- Moda...
+- Moda;
+- Mediana;
+- Mínimo;
+- Máximo;
+- Amplitude;
+- Número de Classe;
+- Intervalo de Classe;
+- Variância Populacional;
+- Variância Amostral;
+- Desvio Padrão Populacional;
+- Desvio Padrão Amostral;
+- Coeficiente De Variação Populacional;
+- Coeficiente De Variação Amostral;
