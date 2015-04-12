@@ -1,7 +1,7 @@
 # Estatística
 Este projeto é direcionado a Matéria de Estatística Aplicada a Computação pela Universidade Regional Integrada do Alto Uruguai e das Missões.
 Professor: Claodomir A. Martinazzo
-Desenvolvimento: Matheus William Auler, Willian Bampi
+Desenvolvimento: Matheus William Auler e Willian Bampi
 
 # Cálculos implementados
 - Média Aritmética Simples;
