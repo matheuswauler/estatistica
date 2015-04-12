@@ -142,6 +142,78 @@ class CalculosEstatisticos {
 		return $h;
 	}
 
+	public function DistribuicaoAoQuadrado(){
+		$distribuicao = array();
+		$media = $this->MediaAritmeticaSimples();
+		foreach ($this->dados_ordenados as $valor) {
+			$dist = pow(($valor - $media), 2);
+			array_push($distribuicao, $dist);
+		}
+		return $distribuicao;
+	}
 
+	public function VarianciaPopulacional($round = true){
+		$distribuicao = $this->DistribuicaoAoQuadrado();
+		$somatorio = 0;
+		foreach ($distribuicao as $valor) {
+			$somatorio += $valor;
+		}
+		$VarianciaPopulacional = $somatorio / $this->dados_cont;
+		if($round){
+			return round($VarianciaPopulacional, $this->casas_decimais);
+		} else {
+			return $mediana;
+		}
+	}
+
+	public function VarianciaAmostral($round = true){
+		$distribuicao = $this->DistribuicaoAoQuadrado();
+		$somatorio = 0;
+		foreach ($distribuicao as $valor) {
+			$somatorio += $valor;
+		}
+		$VarianciaPopulacional = $somatorio / ($this->dados_cont - 1);
+		if($round){
+			return round($VarianciaPopulacional, $this->casas_decimais);
+		} else {
+			return $mediana;
+		}
+	}
+
+	public function DesvioPadraoPopulacional($round = true){
+		$desvpadp = sqrt($this->VarianciaPopulacional());
+		if($round){
+			return round($desvpadp, $this->casas_decimais);
+		} else {
+			return $mediana;
+		}
+	}
+
+	public function DesvioPadraoAmostral($round = true){
+		$desvpada = sqrt($this->VarianciaAmostral());
+		if($round){
+			return round($desvpada, $this->casas_decimais);
+		} else {
+			return $mediana;
+		}
+	}
+
+	public function CoeficienteDeVariacaoPopulacional($round = true){
+		$coefVarP = $this->DesvioPadraoPopulacional() * 100 / $this->MediaAritmeticaSimples();
+		if($round){
+			return round($coefVarP, $this->casas_decimais);
+		} else {
+			return $mediana;
+		}
+	}
+
+	public function CoeficienteDeVariacaoAmostral($round = true){
+		$coefVarA = $this->DesvioPadraoAmostral() * 100 / $this->MediaAritmeticaSimples();
+		if($round){
+			return round($coefVarA, $this->casas_decimais);
+		} else {
+			return $mediana;
+		}
+	}
 
 }

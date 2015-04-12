@@ -80,13 +80,23 @@ echo "<br />";
 echo "<br />";
 
 $dados = array(
-	6,6,6,6,6,7,7,7,8,8
+	12,18,14,11,15
 );
 
 $CalculosEstatisticos = new CalculosEstatisticos($dados);
 
 echo $CalculosEstatisticos->setCasasDecimais(2);
 echo "<br />";
-echo "Média Aritmética Simples (X): " . $CalculosEstatisticos->MediaAritmeticaSimples();
+echo "Variancia Populacional (): " . $CalculosEstatisticos->VarianciaPopulacional();
 echo "<br />";
-echo "Média Aritmética Ponderada (X): " . $CalculosEstatisticos->MediaAritmeticaPonderada();
+echo "Variancia Amostral (S): " . $CalculosEstatisticos->VarianciaAmostral();
+
+echo "<br />";
+echo "Desvio Padrao Populacional (): " . $CalculosEstatisticos->DesvioPadraoPopulacional();
+echo "<br />";
+echo "Desvio Padrao Amostral (S): " . $CalculosEstatisticos->DesvioPadraoAmostral();
+
+echo "<br />";
+echo "Coeficiente De Variacao Populacional (CVp): " . $CalculosEstatisticos->CoeficienteDeVariacaoPopulacional();
+echo "<br />";
+echo "Coeficiente De Variacao Amostral (CVa): " . $CalculosEstatisticos->CoeficienteDeVariacaoAmostral();
