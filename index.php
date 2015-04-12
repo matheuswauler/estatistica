@@ -36,6 +36,9 @@ echo "<br />";
 echo $CalculosEstatisticos->NumeroClasse();
 echo "<br />";
 echo $CalculosEstatisticos->IntervaloClasse();
+echo "<br />";
+echo "Frequências (Fi): ";
+print_r ($CalculosEstatisticos->Frequencias());
 
 echo "<br />";
 echo "<br />";
@@ -49,6 +52,9 @@ $CalculosEstatisticos = new CalculosEstatisticos($dados);
 echo $CalculosEstatisticos->setCasasDecimais(2);
 echo "<br />";
 echo "Média Aritmética Simples (X): " . $CalculosEstatisticos->MediaAritmeticaSimples();
+echo "<br />";
+echo "Média Aritmética Ponderada (X): " . $CalculosEstatisticos->MediaAritmeticaPonderada();
+
 echo "<br />";
 echo "Média Geométrica Simples (G): " .  $CalculosEstatisticos->MediaGeometricaSimples();
 echo "<br /> Moda: ";
@@ -65,3 +71,22 @@ echo "<br />";
 echo "Número de Classe (K): " . $CalculosEstatisticos->NumeroClasse();
 echo "<br />";
 echo "Intervalo de Classe (h): " . $CalculosEstatisticos->IntervaloClasse();
+echo "<br />";
+echo "Frequências (Fi): ";
+print_r ($CalculosEstatisticos->Frequencias());
+
+
+echo "<br />";
+echo "<br />";
+
+$dados = array(
+	6,6,6,6,6,7,7,7,8,8
+);
+
+$CalculosEstatisticos = new CalculosEstatisticos($dados);
+
+echo $CalculosEstatisticos->setCasasDecimais(2);
+echo "<br />";
+echo "Média Aritmética Simples (X): " . $CalculosEstatisticos->MediaAritmeticaSimples();
+echo "<br />";
+echo "Média Aritmética Ponderada (X): " . $CalculosEstatisticos->MediaAritmeticaPonderada();

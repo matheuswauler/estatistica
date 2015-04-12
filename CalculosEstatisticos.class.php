@@ -40,6 +40,21 @@ class CalculosEstatisticos {
 		}
 	}
 
+	public function MediaAritmeticaPonderada($round = true){
+		$total_Fi = 0;
+		$total_XiFi = 0;
+		foreach ($this->Frequencias() as $X => $Fi) {
+			$total_Fi += $Fi;
+			$total_XiFi += $X * $Fi;
+		}
+		$MediaAritmeticaPonderada = $total_XiFi / $total_Fi;
+		if($round){
+			return round($MediaAritmeticaPonderada, $this->casas_decimais);
+		} else {
+			return $MediaAritmeticaPonderada;
+		}
+	}
+
 	public function MediaGeometricaSimples($round = true){
 		$contador = 1;
 		foreach ($this->dados_ordenados as $valor) {
@@ -53,7 +68,7 @@ class CalculosEstatisticos {
 		}
 	}
 
-	public function Moda($round = true){
+	public function Frequencias(){
 		$mapa = array();
 		foreach ($this->dados_ordenados as $chave => $valor) {
 			if(array_key_exists((string) $valor, $mapa)){
@@ -62,6 +77,11 @@ class CalculosEstatisticos {
 				$mapa[(string) $valor] = 1;
 			}
 		}
+		return $mapa;
+	}
+
+	public function Moda($round = true){
+		$mapa = $this->Frequencias();
 
 		arsort($mapa);
 
@@ -121,5 +141,7 @@ class CalculosEstatisticos {
 		$h = (int) $h + 1;
 		return $h;
 	}
+
+
 
 }
