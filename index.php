@@ -100,3 +100,17 @@ echo "<br />";
 echo "Coeficiente De Variacao Populacional (CVp): " . $CalculosEstatisticos->CoeficienteDeVariacaoPopulacional();
 echo "<br />";
 echo "Coeficiente De Variacao Amostral (CVa): " . $CalculosEstatisticos->CoeficienteDeVariacaoAmostral();
+
+
+echo "<br />";
+echo "<br />";
+
+$dados = array(
+	2210,2255,2350,2380,2380,2390,2420,2440,2450,2550,2630,2825
+);
+
+$CalculosEstatisticos = new CalculosEstatisticos($dados);
+
+echo $CalculosEstatisticos->setCasasDecimais(2);
+echo "<br />";
+echo "Variancia Populacional (): " . $CalculosEstatisticos->Quartil(3);

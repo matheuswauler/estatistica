@@ -11,6 +11,7 @@ Desenvolvimento: Matheus William Auler e Willian Bampi
 - Mediana;
 - Mínimo;
 - Máximo;
+- Quartil;
 - Amplitude;
 - Número de Classe;
 - Intervalo de Classe;
@@ -19,4 +20,4 @@ Desenvolvimento: Matheus William Auler e Willian Bampi
 - Desvio Padrão Populacional;
 - Desvio Padrão Amostral;
 - Coeficiente De Variação Populacional;
-- Coeficiente De Variação Amostral;
+- Coeficiente De Variação Amostral.

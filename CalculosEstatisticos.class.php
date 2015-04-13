@@ -127,6 +127,16 @@ class CalculosEstatisticos {
 		return $this->dados_ordenados[ count( $this->dados_ordenados ) - 1 ];
 	}
 
+	public function Quartil($i, $round = true){
+		$q = (int) ($i/4 * ($this->dados_cont));
+		$media = ( $this->dados_ordenados[$q - 1] + $this->dados_ordenados[$q] ) / 2;
+		if($round){
+			return round($media, $this->casas_decimais);
+		} else {
+			return $media;
+		}
+	}
+
 	public function Amplitude(){
 		return $this->Maximo() - $this->Minimo();
 	}
