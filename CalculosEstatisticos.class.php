@@ -110,7 +110,7 @@ class CalculosEstatisticos {
 		if(count($this->dados_ordenados) % 2 == 0){
 			$mediana = ( $this->dados_ordenados[$metade] + $this->dados_ordenados[$metade + 1] ) / 2;
 		} else {
-			$mediana = $this->dados_ordenados[(int) $metade];
+			$mediana = $this->dados_ordenados[(int) $metade + 1];
 		}
 		if($round){
 			return round($mediana, $this->casas_decimais);
