@@ -162,7 +162,7 @@ class CalculosEstatisticos {
 		if($round){
 			return round($VarianciaPopulacional, $this->casas_decimais);
 		} else {
-			return $mediana;
+			return $VarianciaPopulacional;
 		}
 	}
 
@@ -176,7 +176,7 @@ class CalculosEstatisticos {
 		if($round){
 			return round($VarianciaPopulacional, $this->casas_decimais);
 		} else {
-			return $mediana;
+			return $VarianciaPopulacional;
 		}
 	}
 
@@ -185,7 +185,7 @@ class CalculosEstatisticos {
 		if($round){
 			return round($desvpadp, $this->casas_decimais);
 		} else {
-			return $mediana;
+			return $desvpadp;
 		}
 	}
 
@@ -194,7 +194,7 @@ class CalculosEstatisticos {
 		if($round){
 			return round($desvpada, $this->casas_decimais);
 		} else {
-			return $mediana;
+			return $desvpada;
 		}
 	}
 
@@ -203,7 +203,7 @@ class CalculosEstatisticos {
 		if($round){
 			return round($coefVarP, $this->casas_decimais);
 		} else {
-			return $mediana;
+			return $coefVarP;
 		}
 	}
 
@@ -212,7 +212,7 @@ class CalculosEstatisticos {
 		if($round){
 			return round($coefVarA, $this->casas_decimais);
 		} else {
-			return $mediana;
+			return $coefVarA;
 		}
 	}
 
