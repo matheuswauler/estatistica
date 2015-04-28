@@ -7,6 +7,7 @@ class CalculosEstatisticos {
 	private $dados_ordenados = array(); // Contem todos os dados do problema em ordem do menor para o maior
 	private $dados_cont = 0; // Contem o total de de dados do problema
 	private $casas_decimais = 2; // Contem a precisao de casas deciamis
+	private $mapa_intervalo = array();
 
 	public function __construct($dados = array()){
 		$this->setDados($dados);
@@ -27,6 +28,60 @@ class CalculosEstatisticos {
 		sort($this->dados_ordenados);
 	}
 
+	public function Minimo(){
+		return $this->dados_ordenados[0];
+	}
+
+	public function Maximo(){
+		return $this->dados_ordenados[ count( $this->dados_ordenados ) - 1 ];
+	}
+
+	public function Amplitude(){
+		return $this->Maximo() - $this->Minimo();
+	}
+
+	public function NumeroClasse(){
+		$K = 1 + 3.22 * log($this->dados_cont, 10);
+		return round($K, 0);
+	}
+
+	public function IntervaloClasse(){
+		$h = $this->Amplitude() / $this->NumeroClasse();
+		$h = (int) $h + 1;
+		return $h;
+	}
+
+	public function ConstruirMapaIntervalos(){
+		$h = $this->IntervaloClasse();
+		$minimo = $this->Minimo();
+		$maximo = $this->Maximo();
+		$freq = $minimo;
+		$novo_intervalo = array();
+		$it = 0;
+		$freq_dados = $this->Frequencias();
+		do{
+			$novo_intervalo[$it]['minimo'] = $freq;
+			$freq += $h;
+			$novo_intervalo[$it]['maximo'] = $freq;
+			$novo_intervalo[$it]['Xi'] = ($novo_intervalo[$it]['minimo'] + $novo_intervalo[$it]['maximo']) / 2;
+
+			$acumulador_frequencias = 0;
+			foreach ($freq_dados as $key => $value) {
+				if($key >= $novo_intervalo[$it]['minimo'] && $key < $novo_intervalo[$it]['maximo']){
+					$acumulador_frequencias += $value;
+					echo $key . " ";
+				}
+			}
+			echo "<br />";
+			$novo_intervalo[$it]['Fi'] = $acumulador_frequencias;
+
+			$it++;
+		} while($freq <= $maximo);
+
+		$this->mapa_intervalo = $novo_intervalo;
+		return $this->mapa_intervalo;
+	}
+
 	public function MediaAritmeticaSimples($round = true){
 		$contador = 0;
 		foreach ($this->dados_ordenados as $valor) {
@@ -41,17 +96,17 @@ class CalculosEstatisticos {
 	}
 
 	public function MediaAritmeticaPonderada($round = true){
-		$total_Fi = 0;
-		$total_XiFi = 0;
-		foreach ($this->Frequencias() as $X => $Fi) {
-			$total_Fi += $Fi;
-			$total_XiFi += $X * $Fi;
+		$mapa_intervalo = $this->mapa_intervalo;
+		$somatorio = 0;
+		foreach ($mapa_intervalo as $key => $value) {
+			$somatorio += ($value['Xi'] * $value['Fi']);
 		}
-		$MediaAritmeticaPonderada = $total_XiFi / $total_Fi;
+		$media_aritmetica_ponderada = $somatorio / $this->dados_cont;
+
 		if($round){
-			return round($MediaAritmeticaPonderada, $this->casas_decimais);
+			return round($media_aritmetica_ponderada, $this->casas_decimais);
 		} else {
-			return $MediaAritmeticaPonderada;
+			return $media_aritmetica_ponderada;
 		}
 	}
 
@@ -119,14 +174,6 @@ class CalculosEstatisticos {
 		}
 	}
 
-	public function Minimo(){
-		return $this->dados_ordenados[0];
-	}
-
-	public function Maximo(){
-		return $this->dados_ordenados[ count( $this->dados_ordenados ) - 1 ];
-	}
-
 	public function Quartil($i, $round = true){
 		$q = (int) ($i/4 * ($this->dados_cont));
 		$media = ( $this->dados_ordenados[$q - 1] + $this->dados_ordenados[$q] ) / 2;
@@ -135,21 +182,6 @@ class CalculosEstatisticos {
 		} else {
 			return $media;
 		}
-	}
-
-	public function Amplitude(){
-		return $this->Maximo() - $this->Minimo();
-	}
-
-	public function NumeroClasse(){
-		$K = 1 + 3.22 * log($this->dados_cont, 10);
-		return round($K, 0);
-	}
-
-	public function IntervaloClasse(){
-		$h = $this->Amplitude() / $this->NumeroClasse();
-		$h = (int) $h + 1;
-		return $h;
 	}
 
 	public function DistribuicaoAoQuadrado(){

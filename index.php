@@ -44,7 +44,7 @@ echo "<br />";
 echo "<br />";
 
 $dados = array(
-	150,151,152,154,155,155,156,156,156,157,158,160,160,160,160,161,161,161,162,162,163,163,164,164,165,166,168,168,169,170,172,173
+	150,151,152,153,154,155,155,155,156,156,156,157,158,158,160,160,160,160,160,161,161,161,161,162,162,163,163,164,164,164,165,166,167,168,168,169,170,170,172,173
 );
 
 $CalculosEstatisticos = new CalculosEstatisticos($dados);
@@ -74,6 +74,15 @@ echo "Intervalo de Classe (h): " . $CalculosEstatisticos->IntervaloClasse();
 echo "<br />";
 echo "Frequências (Fi): ";
 print_r ($CalculosEstatisticos->Frequencias());
+echo "<br />";
+echo "<pre>";
+print_r($CalculosEstatisticos->ConstruirMapaIntervalos());
+echo "</pre>";
+echo "<br />";
+echo "<pre>";
+print_r($CalculosEstatisticos->MediaAritmeticaPonderada());
+echo "</pre>";
+
 
 
 echo "<br />";
