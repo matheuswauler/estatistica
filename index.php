@@ -83,7 +83,33 @@ echo "<pre>";
 print_r($CalculosEstatisticos->MediaAritmeticaPonderada());
 echo "</pre>";
 
+echo "<br />";
+echo "<br />";
 
+$dados = array(
+	101,102,103,104,105,106,101,102,103,104,105,106,101,102,103,104,105,106,101,102,103,104,105,106,101,102,103,104,105,106,101,102,103,104,
+	108,109,110,111,112,113,114,108,108,109,110,111,112,113,114,108,108,109,110,111,112,113,114,108,108,109,110,111,112,113,114,108,108,109,110,111,112,113,114,108,109,
+	115,116,117,118,121,115,116,117,118,121,115,116,117,118,121,115,116,117,118,121,115,116,117,118,121,115,116,117,118,121,115,116,117,118,121,
+	122,123,124,126,127,122,123,124,126,127,122,123,124,126,127,122,123,124,126,127,122,123,124,
+	129,130,131,134,135,129,130,131,134,135,129,130,131,134,135,132,133
+);
+
+$CalculosEstatisticos = new CalculosEstatisticos($dados);
+
+echo $CalculosEstatisticos->setCasasDecimais(2);
+echo "Amplitude (R): " . $CalculosEstatisticos->Amplitude();
+echo "<br />";
+echo "Número de Classe (K): " . $CalculosEstatisticos->NumeroClasse();
+echo "<br />";
+echo "Intervalo de Classe (h): " . $CalculosEstatisticos->IntervaloClasse();
+echo "<br />";
+echo "<pre>";
+print_r($CalculosEstatisticos->ConstruirMapaIntervalos());
+echo "</pre>";
+echo "<br />";
+echo "<pre>";
+print_r($CalculosEstatisticos->MediaAritmeticaPonderada());
+echo "</pre>";
 
 echo "<br />";
 echo "<br />";

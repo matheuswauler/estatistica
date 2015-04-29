@@ -51,35 +51,73 @@ class CalculosEstatisticos {
 		return $h;
 	}
 
+	/**
+	Faz a construção de uma mapa com todos os dados para formar a tabela de distribuição de frequência
+	*/
 	public function ConstruirMapaIntervalos(){
-		$h = $this->IntervaloClasse();
-		$minimo = $this->Minimo();
-		$maximo = $this->Maximo();
-		$freq = $minimo;
-		$novo_intervalo = array();
-		$it = 0;
-		$freq_dados = $this->Frequencias();
-		do{
-			$novo_intervalo[$it]['minimo'] = $freq;
-			$freq += $h;
-			$novo_intervalo[$it]['maximo'] = $freq;
-			$novo_intervalo[$it]['Xi'] = ($novo_intervalo[$it]['minimo'] + $novo_intervalo[$it]['maximo']) / 2;
+		$h = $this->IntervaloClasse(); // Contem o intervalo de classe
+		$minimo = $this->Minimo(); // Contem valor mínimo da sequência de dados
+		$maximo = $this->Maximo(); // Contem valor máximo da sequência de dados
+		$freq = $minimo; // Esta variável é utilizada para controlar os intervalos de dados
+		$novo_intervalo = array(); // Nesta variavel ficam armazenadas todas as linhas da tabela com todas as colunas
+		$it = 0; // Iterador do laço
+		$freq_dados = $this->Frequencias(); // Array que tem todas as frequências dos dados de entrada
+		$Fac = 0; // Variável de controle da Frequência Acumulada
+		$FacR = 0; // Variável de controle da Frequência Acumulada Relativa
 
-			$acumulador_frequencias = 0;
+		// Inicia o laço na primeira iteração
+		do{
+			$novo_intervalo[$it]['minimo'] = $freq; // Grava o valor mínimo do intervalo
+			$freq += $h; // Acrescenta no controlador dos intervalos
+			$novo_intervalo[$it]['maximo'] = $freq; // Grava o valor máximo do intervalo
+			$novo_intervalo[$it]['Xi'] = ($novo_intervalo[$it]['minimo'] + $novo_intervalo[$it]['maximo']) / 2; // Grava a média dos pontos do intervalo
+
+			$acumulador_frequencias = 0; // Acumulador da frequência de dados que se encaixam no intervalo
 			foreach ($freq_dados as $key => $value) {
 				if($key >= $novo_intervalo[$it]['minimo'] && $key < $novo_intervalo[$it]['maximo']){
 					$acumulador_frequencias += $value;
 					echo $key . " ";
 				}
 			}
-			echo "<br />";
-			$novo_intervalo[$it]['Fi'] = $acumulador_frequencias;
 
-			$it++;
-		} while($freq <= $maximo);
+			$novo_intervalo[$it]['Fi'] = $acumulador_frequencias; // Adiciona a frequência de dados para este intervalo
+			$Fac += $acumulador_frequencias; // Acrescenta no contador de frequência acumulada
+			$novo_intervalo[$it]['Fac'] = $Fac; // Adiciona a frequência acumulada no mapa
 
-		$this->mapa_intervalo = $novo_intervalo;
-		return $this->mapa_intervalo;
+			// Faz o cálculo do fi(%), frequência relativa
+			$fi = round( $acumulador_frequencias * 100 / $this->dados_cont, 1 );
+			$novo_intervalo[$it]['fi_r'] = $fi; // Adiciona a frequência relativa no mapa
+			$FacR += $fi;
+			$novo_intervalo[$it]['FacR'] = $FacR; // Adiciona a frequência relativa acumulada no mapa
+
+			$it++; // Acrescenta no iterador
+		} while($freq <= $maximo); // Faz o teste de parada do laço while
+
+		// Este if apenas executa caso o a soma das frequências relativas não feche 100%
+		if($FacR != 100){
+			$indice_do_maior = 0; // Grava o índice (linha da tabela) do maior valor fi(%)
+			$guarda_maior = 0; // Grava o valor do maior fi(%) para comparação
+
+			// Este laço procura pelo maior fi(%) da tabela
+			foreach ($novo_intervalo as $it => $linha) {
+				if($guarda_maior < $linha['fi_r']){
+					$guarda_maior = $linha['fi_r'];
+					$indice_do_maior = $it;
+				}
+			}
+
+			$novo_intervalo[$indice_do_maior]['fi_r'] = $guarda_maior + (100 - $FacR); // Realiza a alteração do maior fi(%) com a diferença que falta do FacR para 100%
+
+			// Este trecho recalcula todo o FacR novamente depois de atualizar o valor do fi(%)
+			$FacR = 0;
+			foreach ($novo_intervalo as $it => $linha) {
+				$FacR += $linha['fi_r'];
+				$novo_intervalo[$it]['FacR'] = $FacR;
+			}
+		}
+
+		$this->mapa_intervalo = $novo_intervalo; // adiciona o mapa da tabela de distribuição de frequências no atributo da classe
+		return $this->mapa_intervalo; // Retorna o mapa
 	}
 
 	public function MediaAritmeticaSimples($round = true){
