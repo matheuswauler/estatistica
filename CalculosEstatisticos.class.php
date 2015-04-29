@@ -76,7 +76,6 @@ class CalculosEstatisticos {
 			foreach ($freq_dados as $key => $value) {
 				if($key >= $novo_intervalo[$it]['minimo'] && $key < $novo_intervalo[$it]['maximo']){
 					$acumulador_frequencias += $value;
-					echo $key . " ";
 				}
 			}
 
@@ -85,7 +84,7 @@ class CalculosEstatisticos {
 			$novo_intervalo[$it]['Fac'] = $Fac; // Adiciona a frequência acumulada no mapa
 
 			// Faz o cálculo do fi(%), frequência relativa
-			$fi = round( $acumulador_frequencias * 100 / $this->dados_cont, 1 );
+			$fi = round( $acumulador_frequencias * 100 / $this->dados_cont, $this->casas_decimais );
 			$novo_intervalo[$it]['fi_r'] = $fi; // Adiciona a frequência relativa no mapa
 			$FacR += $fi;
 			$novo_intervalo[$it]['FacR'] = $FacR; // Adiciona a frequência relativa acumulada no mapa
