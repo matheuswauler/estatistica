@@ -19,6 +19,10 @@ class CalculosEstatisticos {
 		$this->dados_cont = count($this->dados);
 	}
 
+	public function getDadosCount(){
+		return $this->dados_cont;
+	}
+
 	public function setCasasDecimais($casas_decimais){
 		$this->casas_decimais = $casas_decimais;
 	}
