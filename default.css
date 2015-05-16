@@ -6,10 +6,29 @@ html, body{
 	background: #f8f8f8;
 	color: #333;
 }
+header{
+	background: #79c441;
+	padding: 15px 0;
+	color: #fff;
+}
 .content{
 	max-width: 800px;
 	margin: 0 auto;
 }
+
+.clearfix:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility: hidden;
+}
+
+
+.clearfix {display:inline;}
+* html .clearfix {height: 1%;}
+.clearfix {display: block;}
+
 h1{
 	font-size: 24px;
 	font-weight: 300;

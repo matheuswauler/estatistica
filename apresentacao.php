@@ -2,9 +2,15 @@
 
 	include 'CalculosEstatisticos.class.php';
 
-	$dados = array(
+	/*$dados = array(
 		150,151,152,153,154,155,155,155,156,156,156,157,158,158,160,160,160,160,160,161,161,161,161,162,162,163,163,164,164,164,165,166,167,168,168,169,170,170,172,173
-	);
+	);*/
+	if( empty($_POST) ) {
+		exit;
+	}
+
+	$dados = str_replace(',', '.', $_POST['sequencia_dados']);
+	$dados = explode(';', $dados);
 
 	$CalculosEstatisticos = new CalculosEstatisticos($dados);
 
@@ -19,6 +25,12 @@
 	<link type="text/css" rel="stylesheet" href="default.css">
 </head>
 <body>
+	<header>
+		<div class="content">
+			Estatística Aplicada a Computação
+		</div>
+	</header>
+
 	<div class="content">
 		<h1>Tabela de distribuição de frequência</h1>
 
