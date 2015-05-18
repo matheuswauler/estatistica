@@ -50,13 +50,13 @@
 			<tbody>
 				<?php foreach ($tabela as $key => $value) { ?>
 					<tr>
-						<td align="center"><?= $value['minimo'] ?> ├ <?= $value['maximo'] ?></td>
+						<td align="center"><?= number_format($value['minimo'], 2, ',', '.'); ?> ├ <?= number_format($value['maximo'], 2, ',', '.'); ?></td>
 						<td align="center"><?= $value['Fi'] ?></td>
-						<td align="center"><?= $value['Xi'] ?></td>
+						<td align="center"><?= number_format($value['Xi'], 2, ',', '.'); ?></td>
 						<td align="center"><?= $value['Fac'] ?></td>
-						<td align="center"><?= str_replace( '.', ',', $value['fi_r'] ) ?></td>
-						<td align="center"><?= str_replace( '.', ',', $value['FacR'] ) ?></td>
-						<td align="center"><?= $value['Fi'] * $value['Xi'] ?></td>
+						<td align="center"><?= number_format($value['fi_r'], 2, ',', '.'); ?></td>
+						<td align="center"><?= number_format($value['FacR'], 2, ',', '.'); ?></td>
+						<td align="center"><?= number_format($value['Fi'] * $value['Xi'], 2, ',', '.'); ?></td>
 					</tr>
 				<?php } ?>
 			</tbody>
@@ -67,7 +67,7 @@
 					<td align="center"><?= $CalculosEstatisticos->getDadosCount(); ?></td>
 					<td align="center">-</td>
 					<td align="center">-</td>
-					<td align="center">100</td>
+					<td align="center"><?= number_format($tabela[count($tabela) - 1]['FacR'], 2, ',', '.'); ?></td>
 					<td align="center">-</td>
 					<td align="center">-</td>
 				</tr>
@@ -80,17 +80,17 @@
 			<tbody>
 				<tr>
 					<th>Média Aritmética Simples</th>
-					<td><?= $CalculosEstatisticos->MediaAritmeticaSimples(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->MediaAritmeticaSimples(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Média Aritmética Ponderada</th>
-					<td><?= $CalculosEstatisticos->MediaAritmeticaPonderada(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->MediaAritmeticaPonderada(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Média Geométrica</th>
-					<td><?= $CalculosEstatisticos->MediaGeometricaSimples(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->MediaGeometricaSimples(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
@@ -99,7 +99,11 @@
 						<?php 
 							$moda = $CalculosEstatisticos->Moda();
 							foreach ($moda as $key => $value) {
-								echo $value;
+								if($value != "Amodal"){
+									echo number_format($value, 2, ',', '.');
+								} else {
+									echo $value;
+								}
 								if(count($moda) - 1 > $key){
 									echo ", ";
 								}
@@ -110,37 +114,37 @@
 
 				<tr>
 					<th>Mediana</th>
-					<td><?= $CalculosEstatisticos->Mediana(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->Mediana(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Variância Populacional</th>
-					<td><?= $CalculosEstatisticos->VarianciaPopulacional(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->VarianciaPopulacional(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Variância Amostral</th>
-					<td><?= $CalculosEstatisticos->VarianciaAmostral(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->VarianciaAmostral(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Desvio Padrão Populacional</th>
-					<td><?= $CalculosEstatisticos->DesvioPadraoPopulacional(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->DesvioPadraoPopulacional(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Desvio Padrão Amostral</th>
-					<td><?= $CalculosEstatisticos->DesvioPadraoAmostral(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->DesvioPadraoAmostral(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Coeficiente de Variação Populacional</th>
-					<td><?= $CalculosEstatisticos->CoeficienteDeVariacaoPopulacional(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->CoeficienteDeVariacaoPopulacional(), 2, ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Coeficiente de Variação Amostral</th>
-					<td><?= $CalculosEstatisticos->CoeficienteDeVariacaoAmostral(); ?></td>
+					<td><?= number_format($CalculosEstatisticos->CoeficienteDeVariacaoAmostral(), 2, ',', '.'); ?></td>
 				</tr>
 			</tbody>
 		</table>
