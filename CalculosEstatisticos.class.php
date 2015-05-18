@@ -27,6 +27,10 @@ class CalculosEstatisticos {
 		$this->casas_decimais = $casas_decimais;
 	}
 
+	public function getCasasDecimais(){
+		return $this->casas_decimais;
+	}
+
 	public function OrdenarDados(){
 		$this->dados_ordenados = $this->dados;
 		sort($this->dados_ordenados);

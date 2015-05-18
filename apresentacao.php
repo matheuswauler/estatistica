@@ -14,7 +14,7 @@
 
 	$CalculosEstatisticos = new CalculosEstatisticos($dados);
 
-	$CalculosEstatisticos->setCasasDecimais(2);
+	$CalculosEstatisticos->setCasasDecimais(1);
 	$tabela = $CalculosEstatisticos->ConstruirMapaIntervalos();
 ?>
 
@@ -50,13 +50,13 @@
 			<tbody>
 				<?php foreach ($tabela as $key => $value) { ?>
 					<tr>
-						<td align="center"><?= number_format($value['minimo'], 2, ',', '.'); ?> ├ <?= number_format($value['maximo'], 2, ',', '.'); ?></td>
+						<td align="center"><?= number_format($value['minimo'], $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?> ├ <?= number_format($value['maximo'], $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 						<td align="center"><?= $value['Fi'] ?></td>
-						<td align="center"><?= number_format($value['Xi'], 2, ',', '.'); ?></td>
+						<td align="center"><?= number_format($value['Xi'], $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 						<td align="center"><?= $value['Fac'] ?></td>
-						<td align="center"><?= number_format($value['fi_r'], 2, ',', '.'); ?></td>
-						<td align="center"><?= number_format($value['FacR'], 2, ',', '.'); ?></td>
-						<td align="center"><?= number_format($value['Fi'] * $value['Xi'], 2, ',', '.'); ?></td>
+						<td align="center"><?= number_format($value['fi_r'], $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
+						<td align="center"><?= number_format($value['FacR'], $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
+						<td align="center"><?= number_format($value['Fi'] * $value['Xi'], $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 					</tr>
 				<?php } ?>
 			</tbody>
@@ -67,7 +67,7 @@
 					<td align="center"><?= $CalculosEstatisticos->getDadosCount(); ?></td>
 					<td align="center">-</td>
 					<td align="center">-</td>
-					<td align="center"><?= number_format($tabela[count($tabela) - 1]['FacR'], 2, ',', '.'); ?></td>
+					<td align="center"><?= number_format($tabela[count($tabela) - 1]['FacR'], $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 					<td align="center">-</td>
 					<td align="center">-</td>
 				</tr>
@@ -80,17 +80,17 @@
 			<tbody>
 				<tr>
 					<th>Média Aritmética Simples</th>
-					<td><?= number_format($CalculosEstatisticos->MediaAritmeticaSimples(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->MediaAritmeticaSimples(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Média Aritmética Ponderada</th>
-					<td><?= number_format($CalculosEstatisticos->MediaAritmeticaPonderada(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->MediaAritmeticaPonderada(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Média Geométrica</th>
-					<td><?= number_format($CalculosEstatisticos->MediaGeometricaSimples(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->MediaGeometricaSimples(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
@@ -100,7 +100,7 @@
 							$moda = $CalculosEstatisticos->Moda();
 							foreach ($moda as $key => $value) {
 								if($value != "Amodal"){
-									echo number_format($value, 2, ',', '.');
+									echo number_format($value, $CalculosEstatisticos->getCasasDecimais(), ',', '.');
 								} else {
 									echo $value;
 								}
@@ -114,37 +114,37 @@
 
 				<tr>
 					<th>Mediana</th>
-					<td><?= number_format($CalculosEstatisticos->Mediana(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->Mediana(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Variância Populacional</th>
-					<td><?= number_format($CalculosEstatisticos->VarianciaPopulacional(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->VarianciaPopulacional(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Variância Amostral</th>
-					<td><?= number_format($CalculosEstatisticos->VarianciaAmostral(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->VarianciaAmostral(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Desvio Padrão Populacional</th>
-					<td><?= number_format($CalculosEstatisticos->DesvioPadraoPopulacional(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->DesvioPadraoPopulacional(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Desvio Padrão Amostral</th>
-					<td><?= number_format($CalculosEstatisticos->DesvioPadraoAmostral(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->DesvioPadraoAmostral(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Coeficiente de Variação Populacional</th>
-					<td><?= number_format($CalculosEstatisticos->CoeficienteDeVariacaoPopulacional(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->CoeficienteDeVariacaoPopulacional(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 
 				<tr>
 					<th>Coeficiente de Variação Amostral</th>
-					<td><?= number_format($CalculosEstatisticos->CoeficienteDeVariacaoAmostral(), 2, ',', '.'); ?></td>
+					<td><?= number_format($CalculosEstatisticos->CoeficienteDeVariacaoAmostral(), $CalculosEstatisticos->getCasasDecimais(), ',', '.'); ?></td>
 				</tr>
 			</tbody>
 		</table>
